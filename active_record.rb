@@ -7,7 +7,7 @@ module ActiveRecord
     def initialize(attributes)
       @attributes = attributes
     end
-
+    
     def method_missing(name, *args)
       if self.class.columns.include?(name)
         @attributes[name]

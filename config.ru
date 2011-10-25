@@ -1,7 +1,4 @@
-class App
-  def call(env)
-    # Return the response array here
-  end
-end
+$:.unshift "." # Fix for 1.9 require
+require "front_controller"
 
-run App.new
+run FrontController.new
