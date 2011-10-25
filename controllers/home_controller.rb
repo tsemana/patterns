@@ -3,7 +3,8 @@ class HomeController < Controller
   after_filter  :footer
   
   def index
-    response.write "Hello from home!"
+    @message = "this is a message"
+    render :index
   end
   
   def nice
