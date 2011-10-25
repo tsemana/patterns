@@ -8,6 +8,7 @@ class Controller
   
   def render(action)
     response.write render_to_string(action)
+    @rendered = true
   end
   
   def render_to_string(action)
@@ -21,5 +22,9 @@ class Controller
   
   def controller_name
     self.class.name[/^(\w+)Controller$/, 1].downcase
+  end
+  
+  def rendered?
+    @rendered
   end
 end

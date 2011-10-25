@@ -4,7 +4,7 @@ class HomeController < Controller
   
   def index
     @message = "this is a message"
-    render :index
+    # render :index
   end
   
   def nice
