@@ -46,4 +46,14 @@ class UserTest < Test::Unit::TestCase
   def test_table_name
     assert_equal "users", User.table_name
   end
+  
+  def test_scope
+    sql = User.where("name = 'Marc'").where("id = 1").to_sql
+    assert_equal "SELECT * FROM users WHERE name = 'Marc' AND id = 1", sql
+  end
+  
+  def test_execute_query
+    scope = User.where("name = 'Marc'")
+    assert_kind_of User, scope.first
+  end
 end
