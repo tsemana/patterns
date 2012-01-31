@@ -1,7 +1,7 @@
 class HomeController < Controller
   before_filter :header
-  # after_filter :footer
-  # around_filter :layout
+  after_filter :footer
+  around_filter :layout
   
   def index
     response.write "Hi from home controller"
