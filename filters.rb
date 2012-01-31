@@ -31,8 +31,8 @@ module Filters
     end
     
     around_filters.reverse.each do |method|
-      proc = process_proc
-      process_proc = proc { send(method, &proc) }
+      current_proc = process_proc
+      process_proc = proc { send(method, &current_proc) }
     end
     
     process_proc.call
