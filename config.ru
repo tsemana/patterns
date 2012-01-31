@@ -1,11 +1,4 @@
-class App
-  def call(env)
-    [
-      200,
-      { "Content-Type" => "text/plain" },
-      [env["PATH_INFO"]]
-    ]
-  end
-end
+$:.unshift "."
+require "front_controller"
 
-run App.new
+run FrontController.new
