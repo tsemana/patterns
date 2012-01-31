@@ -4,7 +4,8 @@ class HomeController < Controller
   around_filter :layout
   
   def index
-    response.write "Hi from home controller"
+    @message = "Hi from home controller"
+    render :index
   end
   
   def nice
