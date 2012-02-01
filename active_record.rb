@@ -43,5 +43,45 @@ module ActiveRecord
     def self.table_name
       name.downcase + "s" # users
     end
+    
+    def self.scoped
+      Relation.new(self)
+    end
+    
+    def self.where(condition)
+      scoped.where(condition)
+    end
+  end
+  
+  class Relation
+    attr_accessor :conditions
+    
+    def initialize(klass)
+      @klass = klass
+      @conditions = []
+    end
+    
+    def where(condition)
+      relation = self.clone
+      relation.conditions += [condition]
+      relation
+    end
+    
+    def to_sql
+      sql = "SELECT * FROM #{@klass.table_name}"
+      if @conditions.any?
+        sql << " WHERE " + @conditions.join(" AND ")
+      end
+      sql
+    end
+    
+    def method_missing(name, *args, &block)
+      if Array.method_defined?(name)
+        array = @klass.find_by_sql(to_sql)
+        array.send(name, *args, &block)
+      else
+        super
+      end
+    end
   end
 end
